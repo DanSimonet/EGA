@@ -1,0 +1,26 @@
+Package: EGA
+Type: Package
+Title: Exploratory Graph Analysis: Estimating the number of dimensions in
+    psychological data
+Version: 0.1
+Date: 2016-05-21
+Author: Hudson F. Golino
+Maintainer: Hudson F. Golino <hfgolino@gmail.com>
+Description: An implementation of the Exploratory Graph Analysis (EGA). EGA is part of a new area called network psychometrics,
+            that focuses on the estimation of undirected network models to psychological datasets. EGA estimates the number of
+            dimensions or factors using graphical lasso and a weighted network community analysis. A bootstrap method for
+            verifying the stability of the estimation is also available. The fit of the structure suggested by EGA can be
+            verified using confirmatory factor analysis and a direct way to convert the EGA structure to CFA is also
+            implemented. Documentation and examples are available.
+License: GPL-3
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports:
+    qgraph,
+    semPlot,
+    bootnet,
+    igraph,
+    lavaan
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
