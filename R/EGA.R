@@ -18,53 +18,53 @@
 #' @export
 
 
-#EGA default function - 03/04/2016
+# EGA default function - 01/18/2017
 
 
 EGA <- function(data, plot.EGA = TRUE) {
-  require(qgraph)
-  require(igraph)
-  data <- as.data.frame(data)
-  cor.data <- cor_auto(data)
-  glasso.ebic <- EBICglasso(S = cor.data, n = nrow(data), lambda.min.ratio = 0.1)
-  graph.glasso <- as.igraph(qgraph(glasso.ebic, layout = "spring", vsize = 3,DoNotPlot = TRUE))
-  wc <- walktrap.community(graph.glasso)
-  n.dim <- max(wc$membership)
-
-  if (plot.EGA == TRUE) {
-    plot.ega <- qgraph(glasso.ebic, layout = "spring", vsize = 4, groups = as.factor(wc$membership))
+  if(!require(qgraph)) {
+    message("installing the 'qgraph' package")
+    install.packages("qgraph")
   }
 
-  a <- list()
-  a$n.dim <- n.dim
-  a$correlation <- cor.data
-  a$glasso <- glasso.ebic
-  a$wc <- wc$membership
-  dim.variables <- data.frame(items = names(data), dimension = a$wc)
-  dim.variables <- dim.variables[order(dim.variables[,2]),]
-  a$dim.variables <- dim.variables
-  class(a) <- c("EGA", "list")
-  return(a)
+  if(!require(igraph)) {
+    message("installing the 'igraph' package")
+    install.packages("igraph")
+  }
+
+    data <- as.data.frame(data)
+    cor.data <- cor_auto(data)
+    glasso.ebic <- EBICglasso(S = cor.data, n = nrow(data), lambda.min.ratio = 0.1)
+    graph.glasso <- as.igraph(qgraph(glasso.ebic, layout = "spring", vsize = 3, DoNotPlot = TRUE))
+    wc <- walktrap.community(graph.glasso)
+    n.dim <- max(wc$membership)
+
+    if (plot.EGA == TRUE) {
+        plot.ega <- qgraph(glasso.ebic, layout = "spring", vsize = 5, groups = as.factor(wc$membership))
+    }
+
+    a <- list()
+    a$n.dim <- n.dim
+    a$correlation <- cor.data
+    a$glasso <- glasso.ebic
+    a$wc <- wc$membership
+    dim.variables <- data.frame(items = names(data), dimension = a$wc)
+    dim.variables <- dim.variables[order(dim.variables[, 2]), ]
+    a$dim.variables <- dim.variables
+    class(a) <- c("EGA", "list")
+    return(a)
 }
 
-print.EGA <- function(x, ...)
-{
-  cat("EGA Results:\n")
-  cat("\nNumber of Dimensions:\n")
-  print(x$n.dim)
-  cat("\nItems per Dimension:\n")
-  print(x$dim.variables)
+print.EGA <- function(x, ...) {
+    cat("EGA Results:\n")
+    cat("\nNumber of Dimensions:\n")
+    print(x$n.dim)
+    cat("\nItems per Dimension:\n")
+    print(x$dim.variables)
 }
 
-plot.EGA <- function(object,
-                     layout = 'spring',
-                     vsize = 4,
-                     ...) {
-  groups = as.factor(object$wc)
-  variable = object$glasso
-  qgraph(variable,
-         layout = layout,
-         vsize = vsize,
-         groups = groups,
-         ...)
+plot.EGA <- function(object, layout = "spring", vsize = 4, ...) {
+    groups = as.factor(object$wc)
+    variable = object$glasso
+    qgraph(variable, layout = layout, vsize = vsize, groups = groups, ...)
 }

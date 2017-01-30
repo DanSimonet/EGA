@@ -2,8 +2,8 @@ Package: EGA
 Type: Package
 Title: Exploratory Graph Analysis: Estimating the number of dimensions in
     psychological data
-Version: 0.1
-Date: 2016-05-21
+Version: 0.2
+Date: 2017-01-18
 Author: Hudson F. Golino
 Maintainer: Hudson F. Golino <hfgolino@gmail.com>
 Description: An implementation of the Exploratory Graph Analysis (EGA). EGA is part of a new area called network psychometrics,
@@ -16,11 +16,13 @@ License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
-    qgraph,
-    semPlot,
-    bootnet,
-    igraph,
-    lavaan
+    qgraph (>= 1.4.1),
+    semPlot (>= 1.0.1),
+    bootnet (>= 0.3),
+    igraph (>= 1.0.1),
+    lavaan (>= 0.5-22),
+    doParallel (>= 1.0.10),
+    foreach (>= 1.4.3)
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

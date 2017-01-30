@@ -1,7 +1,7 @@
 Exploratory Graph Analysis: An introduction using the EGA package.
 ================
-Hudson F. Golino^1
-1. Graduate School of Psychology, Universidade Salgado de Oliveira, Niterói, Rio de Janeiro, Brazil.
+Hudson F. Golino
+Graduate School of Psychology, Universidade Salgado de Oliveira, Niterói, Rio de Janeiro, Brazil.
 Contact: <hfgolino@gmail.com>
 2016-09-25
 
